@@ -1,44 +1,70 @@
 import { siteConfig } from "@/lib/site";
 
-const footerLinks = [
-  { label: "Contact", href: `mailto:${siteConfig.email}` },
-  { label: "Privacy", href: "/policies#privacy" },
-  { label: "Terms", href: "/policies#terms" },
-  { label: "Refund policy", href: "/policies#refund-policy" },
-  { label: "Shipping", href: "/policies#shipping" },
+const protocolLinks = [
+  { label: "The Letter", href: "#letter" },
+  { label: "Three Locks", href: "#locks" },
+  { label: "The 21 Days", href: "#days" },
+  { label: "Inside the Book", href: "#inside" },
+  { label: "Clinical Comparison", href: "#comparison" },
+];
+
+const policyLinks = [
+  { label: "Direct Support", href: `mailto:${siteConfig.email}` },
+  { label: "Privacy Policy", href: "/policies#privacy" },
+  { label: "Terms of Service", href: "/policies#terms" },
+  { label: "60-Day Guarantee", href: "/policies#refund-policy" },
+  { label: "Worldwide Shipping", href: "/policies#shipping" },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line">
-      <div className="container-page pb-32 pt-12 md:pb-12">
-        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
-          <div>
-            <p className="font-serif text-lg text-paper">{siteConfig.name}</p>
-            <p className="mt-2 font-sans text-base text-slate">
-              By {siteConfig.author}, neuroscientist.
+    <footer className="footer">
+      <div className="container-page">
+        <div className="footer__grid">
+          <div className="footer__brand-col">
+            <span className="footer__wordmark">{siteConfig.name}</span>
+            <p className="footer__tagline">
+              A 21-day clinical neuroscience protocol targeting the three primal survival
+              locks: Fear, Comfort, and Status. Author: {siteConfig.author}, {siteConfig.authorRole}.
             </p>
+            <div className="footer__badge">
+              <span>Standard Edition &bull; Archival Hardcover + Field Journal</span>
+            </div>
           </div>
 
-          <nav aria-label="Footer">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="footer-link text-base">
+          <div className="footer__col">
+            <h3 className="footer__heading">Navigation</h3>
+            <ul className="footer__list">
+              {protocolLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="footer__link">
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
+
+          <div className="footer__col">
+            <h3 className="footer__heading">Support & Guarantee</h3>
+            <ul className="footer__list">
+              {policyLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="footer__link">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6">
-          <p className="font-sans text-base text-paper">
-            For education, not medical advice.
+        <div className="footer__bottom">
+          <p className="footer__legal">
+            Educational material based on neuroscience. Not medical advice or treatment. If managing clinical anxiety or medical conditions, consult your physician.
           </p>
-          <p className="font-sans text-base text-slate">
-            © {new Date().getFullYear()} The Limitless Black Book.
+          <p className="footer__copy">
+            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>
       </div>
