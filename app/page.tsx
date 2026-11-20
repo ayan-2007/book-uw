@@ -1,6 +1,7 @@
 import { BuyButton } from "@/components/buy-button";
 import { LocksScroller } from "@/components/locks-scroller";
 import { Media } from "@/components/media";
+import { images } from "@/lib/images";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StickyBuyBar } from "@/components/sticky-buy-bar";
