@@ -1,19 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Hanken_Grotesk, Young_Serif } from "next/font/google";
+import { Young_Serif, Geist } from "next/font/google";
 import "./globals.css";
 
 const youngSerif = Young_Serif({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-young-serif",
+  variable: "--font-serif",
+  adjustFontFallback: true,
 });
 
-const hankenGrotesk = Hanken_Grotesk({
+const geistSans = Geist({
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
-  variable: "--font-hanken",
+  variable: "--font-sans",
+  adjustFontFallback: true,
 });
 
 const siteUrl =
@@ -78,7 +80,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${youngSerif.variable} ${hankenGrotesk.variable}`}>
+    <html lang="en" className={`${youngSerif.variable} ${geistSans.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content

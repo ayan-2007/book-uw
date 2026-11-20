@@ -74,10 +74,6 @@
     --letter-measure: 62ch;
     --header-h: 64px;
     --control-h: 44px;
-
-    --font-sans: var(--font-hanken), ui-sans-serif, system-ui, -apple-system,
-      "Segoe UI", sans-serif;
-    --font-serif: var(--font-young-serif), Georgia, "Times New Roman", serif;
   }
 
   *,
@@ -123,12 +119,15 @@
   h1,
   h2,
   h3 {
-    line-height: 1.1;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    line-height: 1.08;
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
   h4 {
+    font-family: var(--font-serif);
     line-height: 1.2;
     letter-spacing: -0.01em;
     text-wrap: balance;
@@ -137,6 +136,11 @@
   p {
     max-width: var(--measure);
     text-wrap: pretty;
+  }
+
+  /* Tabular numerals for prices and timeline */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 
   a {
@@ -204,10 +208,11 @@
     border-radius: var(--radius-sm);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     text-align: center;
     text-decoration: none;
+    text-transform: capitalize;
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
@@ -288,6 +293,9 @@
     color: var(--text);
     text-decoration: none;
     text-underline-offset: 0.2em;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: capitalize;
     transition: color var(--dur-fast) var(--ease-out);
   }
 

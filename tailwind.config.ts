@@ -23,15 +23,8 @@ const config: Config = {
         danger: "rgb(var(--danger-rgb) / <alpha-value>)",
       },
       fontFamily: {
-        serif: ["var(--font-young-serif)", "Georgia", "serif"],
-        sans: [
-          "var(--font-hanken)",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "sans-serif",
-        ],
+        serif: "var(--font-serif)",
+        sans: "var(--font-sans)",
       },
       spacing: {
         0: "0px",
