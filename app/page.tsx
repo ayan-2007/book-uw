@@ -6,7 +6,6 @@ import { SiteHeader } from "@/components/site-header";
 import { StickyBuyBar } from "@/components/sticky-buy-bar";
 import { locks } from "@/data/locks";
 import { testimonials } from "@/data/testimonials";
-import { images } from "@/lib/images";
 import { siteConfig } from "@/lib/site";
 
 const chapters = [
@@ -23,22 +22,22 @@ const chapters = [
   {
     title: "The Fear lock",
     image: images.fear,
-    position: "object-[50%_40%]",
+    position: "object-[50%_40%}",
   },
   {
     title: "The Comfort lock",
     image: images.comfort,
-    position: "object-[50%_40%]",
+    position: "object-[50%_40%}",
   },
   {
     title: "The Status lock",
     image: images.status,
-    position: "object-[50%_40%]",
+    position: "object-[50%_40%}",
   },
   {
     title: "The Limitless Routine",
     image: images.door,
-    position: "object-[72%_50%]",
+    position: "object-[72%_50%}",
   },
 ];
 
@@ -74,7 +73,7 @@ const faqs = [
   {
     question: "Is it too late in my 50s?",
     answer:
-      "No. The brain keeps changing with practice. That’s called neuroplasticity.",
+      "No. The brain keeps changing with practice. That's called neuroplasticity.",
   },
   {
     question: "How much time per day?",
@@ -83,11 +82,11 @@ const faqs = [
   {
     question: "Is this therapy or medical advice?",
     answer:
-      "No. If you’re dealing with anxiety, depression or a medical condition, keep working with your doctor.",
+      "No. If you're dealing with anxiety, depression or a medical condition, keep working with your doctor.",
   },
   {
     question: "Is this about manipulating people?",
-    answer: "No. It’s about you: steadier, more disciplined, more present.",
+    answer: "No. It's about you: steadier, more disciplined, more present.",
   },
   {
     question: "When do I get it?",
@@ -101,7 +100,7 @@ const faqs = [
   {
     question: "How does the guarantee work?",
     answer:
-      "Email support@aphro-d.com within 60 days of your order and we’ll refund every cent.",
+      "Email support@aphro-d.com within 60 days of your order and we'll refund every cent.",
   },
 ];
 
@@ -178,7 +177,7 @@ export default function HomePage() {
                 id="hero-title"
                 className="hero-reveal hero-reveal-2 mt-4 max-w-[13ch] font-serif text-4xl text-paper"
               >
-                It’s not your personality. It’s three locks in your brain.
+                It's not your personality. It's three locks in your brain.
               </h1>
               <p className="hero-reveal hero-reveal-3 mt-6 max-w-[52ch] font-sans text-lg text-paper">
                 Fear that freezes you. Comfort that drains you. A brain that
@@ -192,13 +191,11 @@ export default function HomePage() {
             <div className="lg:col-span-5">
               <div className="mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto">
                 <Media
-                  src={images.hardcover.src}
-                  alt={images.hardcover.alt}
-                  width={images.hardcover.width}
-                  height={images.hardcover.height}
-                  className="aspect-[4/5] w-full"
-                  imageClassName="object-[50%_45%]"
-                  sizes="(min-width: 1024px) 32vw, (min-width: 768px) 48vw, 90vw"
+                  src="/img/hero-brain.jpg"
+                  alt="Opening spread of The Limitless Black Book - a neurological brain illustration with the title text"
+                  width={800}
+                  height={600}
+                  className="aspect-[4/3] w-full object-cover"
                   priority
                 />
                 <p className="mt-3 font-sans text-base text-slate">
@@ -222,6 +219,14 @@ export default function HomePage() {
               >
                 Two men. Same start. Very different lives.
               </h2>
+
+              <Media
+                src="/img/farhan.jpg"
+                alt="Farhan Khawaja, PhD neuroscientist author of The Limitless Black Book"
+                width={500}
+                height={625}
+                className="rounded-md mb-6"
+              />
 
               <div className="mt-8 space-y-6 font-serif text-lg leading-[1.7] text-paper">
                 <p className="text-xl leading-[1.6]">
@@ -248,7 +253,7 @@ export default function HomePage() {
                   Your brain still runs on three old survival settings: Fear, a
                   threat alarm built for predators that now fires before every
                   hard conversation. Comfort, a dopamine loop that rewards the
-                  scroll, the snack and ‘I’ll do it tomorrow.’ Status, a
+                  scroll, the snack and 'I'll do it tomorrow.' Status, a
                   ranking system that decides, within seconds, how much space
                   you are allowed to take in a room.
                 </p>
@@ -288,6 +293,29 @@ export default function HomePage() {
             visuals={lockVisuals}
             inlineVisuals={lockInlineVisuals}
           />
+          <div className="mt-8 grid grid-cols-1 gap-4">
+            <Media
+              src="/img/fear.jpg"
+              alt="Fear lock illustration - key and lock imagery representing the fear survival setting"
+              width={400}
+              height={400}
+              className="border rounded-sm object-cover"
+            />
+            <Media
+              src="/img/comfort.jpg"
+              alt="Comfort lock illustration - dopamine loop and scrolling imagery representing the comfort survival setting"
+              width={400}
+              height={400}
+              className="border rounded-sm object-cover"
+            />
+            <Media
+              src="/img/status.jpg"
+              alt="Status lock illustration - crown and status symbols representing the status survival setting"
+              width={400}
+              height={400}
+              className="border rounded-sm object-cover"
+            />
+          </div>
         </section>
 
         <section
@@ -311,28 +339,46 @@ export default function HomePage() {
 
               <div className="mt-12 lg:col-span-7 lg:col-start-6 lg:mt-0">
                 <ol className="ml-4 border-l border-line">
-                  {days.map((day, index) => (
-                    <li
-                      key={day.label}
-                      className="relative pb-12 pl-8 last:pb-0"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="absolute -left-4 top-0 flex h-8 w-8 items-center justify-center rounded-sm border border-line bg-surface font-serif text-base tabular-nums text-paper"
+                  {days.map((day, index) => {
+                    const dayImage = [
+                      "/img/day-1.jpg",
+                      "/img/week-1.jpg",
+                      "/img/week-2.jpg",
+                      "/img/week-3.jpg",
+                      "/img/week-1.jpg",
+                      "/img/week-2.jpg",
+                      "/img/week-3.jpg",
+                    ][index];
+                    return (
+                      <li
+                        key={day.label}
+                        className="relative pb-12 pl-8 last:pb-0"
                       >
-                        {index + 1}
-                      </span>
-                      <p className="font-sans text-base text-slate">
-                        {day.label}
-                      </p>
-                      <h3 className="mt-2 font-serif text-xl text-paper">
-                        {day.title}
-                      </h3>
-                      <p className="mt-2 font-sans text-base text-paper">
-                        {day.body}
-                      </p>
-                    </li>
-                  ))}
+                        <span
+                          aria-hidden="true"
+                          className="absolute -left-4 top-0 flex h-8 w-8 items-center justify-center rounded-sm border border-line bg-surface font-serif text-base tabular-nums text-paper"
+                        >
+                          {index + 1}
+                        </span>
+                        <p className="font-sans text-base text-slate">
+                          {day.label}
+                        </p>
+                        <h3 className="mt-2 font-serif text-xl text-paper">
+                          {day.title}
+                        </h3>
+                        <p className="mt-2 font-sans text-base text-paper">
+                          {day.body}
+                        </p>
+                        <Media
+                          src={dayImage}
+                          alt={`Day ${index + 1} of the 21-day protocol - visual progress illustration`}
+                          width={200}
+                          height={200}
+                          className="mt-4 rounded-md object-cover"
+                        />
+                      </li>
+                    )
+                  })}
                 </ol>
               </div>
             </div>
@@ -360,13 +406,11 @@ export default function HomePage() {
                   <li key={chapter.title} className="border-b border-line">
                     <div className="flex items-center gap-6 py-4">
                       <Media
-                        src={chapter.image.src}
-                        alt={chapter.image.alt}
-                        width={chapter.image.width}
-                        height={chapter.image.height}
-                        className="aspect-[4/3] w-24 shrink-0"
-                        imageClassName={chapter.position}
-                        sizes="96px"
+                        src={`/img/${["factory","key","routine","door"][index] || "factory"}.jpg`}
+                        alt={`Chapter ${index + 1} thumbnail - ${chapter.title}`}
+                        width={96}
+                        height={72}
+                        className="aspect-[4/3] w-24 shrink-0 object-cover border rounded-sm"
                       />
                       <div className="min-w-0">
                         <p className="font-sans text-base text-slate">
@@ -393,13 +437,11 @@ export default function HomePage() {
             <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
                 <Media
-                  src={images.farhan.src}
-                  alt={images.farhan.alt}
-                  width={images.farhan.width}
-                  height={images.farhan.height}
-                  className="aspect-[4/5] w-full max-w-sm"
-                  imageClassName="object-[50%_30%]"
-                  sizes="(min-width: 1024px) 32vw, (min-width: 768px) 48vw, 90vw"
+                  src="/img/farhan.jpg"
+                  alt="Farhan Khawaja, PhD neuroscientist author of The Limitless Black Book"
+                  width={500}
+                  height={625}
+                  className="aspect-[4/5] w-full max-w-sm object-[50%_30%]"
                 />
               </div>
 
@@ -427,8 +469,8 @@ export default function HomePage() {
                 </ul>
 
                 <blockquote className="mt-8 max-w-[48ch] font-serif text-xl leading-[1.5] text-paper">
-                  “Three locks, three weeks, about twenty minutes a day. No gym,
-                  no gadgets, no willpower speeches.”
+                  "Three locks, three weeks, about twenty minutes a day. No gym,
+                  no gadgets, no willpower speeches."
                 </blockquote>
               </div>
             </div>
@@ -452,7 +494,7 @@ export default function HomePage() {
                   className="border-b border-line py-8"
                 >
                   <blockquote className="max-w-[52ch] font-serif text-xl leading-[1.5] text-paper">
-                    “{testimonial.quote}”
+                    " {testimonial.quote}"
                   </blockquote>
                   <figcaption className="mt-4 font-sans text-base text-slate">
                     <span className="text-paper">{testimonial.name}</span>,{" "}
@@ -539,12 +581,11 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-12">
               <div className="flex items-center justify-center border-b border-line p-6 md:p-8 lg:col-span-5 lg:border-b-0 lg:border-r lg:p-12">
                 <Media
-                  src={images.cover.src}
-                  alt={images.cover.alt}
-                  width={images.cover.width}
-                  height={images.cover.height}
-                  className="aspect-[4/5] w-full max-w-sm"
-                  imageClassName="object-[50%_42%]"
+                  src="/img/cover.jpg"
+                  alt="The Limitless Black Book cover"
+                  width={400}
+                  height={500}
+                  className="aspect-[4/5] w-full max-w-sm object-[50%_42%]"
                   sizes="(min-width: 1024px) 34vw, (min-width: 768px) 50vw, 90vw"
                 />
               </div>
@@ -593,6 +634,13 @@ export default function HomePage() {
                     <span className="sr-only">Regular price </span>
                     <s className="tabular-nums">$179</s>
                   </p>
+                  <Media
+                    src="/img/book-standing.jpg"
+                    alt="Hardcover book standing on a surface"
+                    width={400}
+                    height={500}
+                    className="hidden lg:block"
+                  />
                 </div>
                 <p className="mt-3 font-sans text-base text-slate">
                   Free shipping to the US, UK and Europe.
@@ -603,12 +651,12 @@ export default function HomePage() {
                 </div>
 
                 <p className="mt-4 max-w-[54ch] font-sans text-base text-paper">
-                  60-day refund. Do the 21 days. If you don’t feel the
+                  60-day refund. Do the 21 days. If you don't feel the
                   difference, email{" "}
                   <a href={`mailto:${siteConfig.email}`} className="link">
                     {siteConfig.email}
                   </a>{" "}
-                  within 60 days of your order and we’ll refund every cent.
+                  within 60 days of your order and we'll refund every cent.
                 </p>
               </div>
             </div>
@@ -669,7 +717,7 @@ export default function HomePage() {
                         >
                           {siteConfig.email}
                         </a>{" "}
-                        within 60 days of your order and we’ll refund every
+                        within 60 days of your order and we'll refund every
                         cent.
                       </p>
                     ) : (
@@ -689,13 +737,12 @@ export default function HomePage() {
         >
           <div className="absolute inset-0 -z-20">
             <Media
-              src={images.door.src}
-              alt={images.door.alt}
-              width={images.door.width}
-              height={images.door.height}
-              className="h-full w-full"
-              imageClassName="object-[76%_50%] lg:object-center"
-              sizes="100vw"
+              src="/img/door.jpg"
+              alt="Door illustration representing the final call to start the 21-day protocol"
+              width={1200}
+              height={800}
+              className="h-full w-full object-cover"
+              priority
             />
           </div>
           <div
