@@ -1,17 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Young_Serif, Geist } from "next/font/google";
+import { Geist, Newsreader } from "next/font/google";
 import "./globals.css";
 
-const youngSerif = Young_Serif({
-  weight: "400",
+const newsreader = Newsreader({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-serif",
   adjustFontFallback: true,
+  axes: ["opsz"],
 });
 
-const geistSans = Geist({
-  weight: ["400", "500", "600"],
+const geist = Geist({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
@@ -73,14 +72,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "dark",
-  themeColor: "#08182F",
+  themeColor: "#050b14",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${youngSerif.variable} ${geistSans.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${geist.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content
