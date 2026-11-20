@@ -1,44 +1,50 @@
+import Image from "next/image";
 import { BuyButton } from "@/components/buy-button";
-import { LocksScroller } from "@/components/locks-scroller";
-import { Media } from "@/components/media";
-import { images } from "@/lib/images";
+import { DiagnosticMatrix } from "@/components/diagnostic-matrix";
+import { FAQAccordion } from "@/components/faq-accordion";
+import { NeuralLocksConsole } from "@/components/neural-locks-console";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StickyBuyBar } from "@/components/sticky-buy-bar";
-import { locks } from "@/data/locks";
 import { testimonials } from "@/data/testimonials";
 import { siteConfig } from "@/lib/site";
 
 const chapters = [
   {
+    num: "01",
     title: "Factory settings",
-    image: images.heroBrain,
-    position: "object-[50%_42%]",
+    desc: "Understanding the ancient biological survival mechanisms that control daily behavior.",
+    image: "/img/factory.jpg",
   },
   {
+    num: "02",
     title: "The 48-Hour Key",
-    image: images.key,
-    position: "object-center",
+    desc: "The critical catalyst: executing one undeniable physical action to break inertia.",
+    image: "/img/key.jpg",
   },
   {
+    num: "03",
     title: "The Fear lock",
-    image: images.fear,
-    position: "object-[50%_40%}",
+    desc: "Regulating the amygdala alarm and dismantling physiological hesitation.",
+    image: "/img/fear.jpg",
   },
   {
+    num: "04",
     title: "The Comfort lock",
-    image: images.comfort,
-    position: "object-[50%_40%}",
+    desc: "Rewiring the dopamine loop to eliminate passive digital avoidance.",
+    image: "/img/comfort.jpg",
   },
   {
+    num: "05",
     title: "The Status lock",
-    image: images.status,
-    position: "object-[50%_40%}",
+    desc: "Recalibrating subconscious social hierarchy and command over the room.",
+    image: "/img/status.jpg",
   },
   {
+    num: "06",
     title: "The Limitless Routine",
-    image: images.door,
-    position: "object-[72%_50%}",
+    desc: "The daily 15–20 minute neuro-kinetic maintenance protocol.",
+    image: "/img/routine.jpg",
   },
 ];
 
@@ -47,26 +53,41 @@ const days = [
     label: "Day 1",
     title: "Take your Limitless Score and make the 48-hour move.",
     body: "Your starting point, then one real action within two days.",
+    image: "/img/day-1.jpg",
+    alt: "A single figure at the start of the 21-day protocol.",
+    badge: "Diagnostic Baseline",
   },
   {
     label: "Days 1–7",
     title: "Fear",
     body: "Stop flinching. Settle the alarm and act anyway.",
+    image: "/img/week-1.jpg",
+    alt: "Week one — the fear lock.",
+    badge: "Phase 01: Amygdala Reset",
   },
   {
     label: "Days 8–14",
     title: "Comfort",
     body: "Break the loop. Make hard things feel less heavy.",
+    image: "/img/week-2.jpg",
+    alt: "Week two — the comfort lock.",
+    badge: "Phase 02: Dopamine Loop",
   },
   {
     label: "Days 15–21",
     title: "Status",
     body: "Own the room. Change the signals you send.",
+    image: "/img/week-3.jpg",
+    alt: "Week three — the status lock.",
+    badge: "Phase 03: Social Dominance",
   },
   {
     label: "Day 21",
     title: "Retake your Limitless Score.",
     body: "Compare where you started with where you are.",
+    image: "/img/day-1.jpg",
+    alt: "The end of the protocol and the retaken score.",
+    badge: "Objective Verification",
   },
 ];
 
@@ -74,7 +95,7 @@ const faqs = [
   {
     question: "Is it too late in my 50s?",
     answer:
-      "No. The brain keeps changing with practice. That's called neuroplasticity.",
+      "No. The brain keeps changing with practice. That’s called neuroplasticity.",
   },
   {
     question: "How much time per day?",
@@ -83,11 +104,11 @@ const faqs = [
   {
     question: "Is this therapy or medical advice?",
     answer:
-      "No. If you're dealing with anxiety, depression or a medical condition, keep working with your doctor.",
+      "No. If you’re dealing with anxiety, depression or a medical condition, keep working with your doctor.",
   },
   {
     question: "Is this about manipulating people?",
-    answer: "No. It's about you: steadier, more disciplined, more present.",
+    answer: "No. It’s about you: steadier, more disciplined, more present.",
   },
   {
     question: "When do I get it?",
@@ -101,7 +122,7 @@ const faqs = [
   {
     question: "How does the guarantee work?",
     answer:
-      "Email support@aphro-d.com within 60 days of your order and we'll refund every cent.",
+      "Email support@aphro-d.com within 60 days of your order and we’ll refund every cent.",
   },
 ];
 
@@ -132,638 +153,727 @@ const comparisonRows = [
   },
 ];
 
+const readerMedia = [
+  {
+    photo: "/img/mike.jpg",
+    avatar: "/img/mike-avatar.jpg",
+    photoAlt: "Mike Sager with his copy of The Limitless Black Book.",
+    verified: "Verified Reader &bull; Age 74",
+  },
+  {
+    photo: "/img/zander.jpg",
+    avatar: "/img/zander-avatar.jpg",
+    photoAlt: "Zander P. holding The Limitless Black Book.",
+    verified: "Verified Reader &bull; Executive Consultant",
+  },
+  {
+    photo: null,
+    avatar: null,
+    photoAlt: "",
+    verified: "Verified Reader &bull; Trustpilot Review",
+  },
+];
+
 export default function HomePage() {
-  const lockVisuals = locks.map((lock) => (
-    <Media
-      key={lock.id}
-      src={lock.image.src}
-      alt={lock.image.alt}
-      width={lock.image.width}
-      height={lock.image.height}
-      className="h-full w-full"
-      imageClassName="object-[50%_40%]"
-      sizes="(min-width: 1024px) 40vw, 1px"
-    />
-  ));
-
-  const lockInlineVisuals = locks.map((lock) => (
-    <Media
-      key={lock.id}
-      src={lock.image.src}
-      alt={lock.image.alt}
-      width={lock.image.width}
-      height={lock.image.height}
-      className="aspect-[4/3] w-full"
-      imageClassName="object-[50%_40%]"
-      sizes="(min-width: 1024px) 1px, 92vw"
-    />
-  ));
-
   return (
-    <div id="top">
+    <div id="top" className="site-wrapper">
       <SiteHeader />
 
       <main id="main-content">
-        <section
-          id="hero"
-          aria-labelledby="hero-title"
-          className="container-page pb-16 pt-8 md:pb-24 md:pt-16"
-        >
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <p className="hero-reveal hero-reveal-1 font-sans text-base text-slate">
-                {siteConfig.author}, neuroscientist
-              </p>
-              <h1
-                id="hero-title"
-                className="hero-reveal hero-reveal-2 mt-4 max-w-[13ch] font-serif text-4xl text-paper"
-              >
-                It's not your personality. It's three locks in your brain.
-              </h1>
-              <p className="hero-reveal hero-reveal-3 mt-6 max-w-[52ch] font-sans text-lg text-paper">
-                Fear that freezes you. Comfort that drains you. A brain that
-                ranks you low before you speak. Break all three in 21 days.
-              </p>
-              <div className="hero-reveal hero-reveal-4 mt-8">
-                <BuyButton />
-              </div>
-            </div>
+        {/* HERO SECTION */}
+        <section id="hero" className="hero" aria-labelledby="hero-title">
+          {/* Background atmosphere */}
+          <div className="hero__backdrop" aria-hidden="true">
+            <Image
+              src="/img/hero-brain.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover hero__backdrop-img"
+            />
+            <div className="hero__overlay" />
+            <div className="hero__radial" />
+          </div>
 
-            <div className="lg:col-span-5">
-              <div className="mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto">
-                <Media
-                  src="/img/hero-brain.jpg"
-                  alt="Opening spread of The Limitless Black Book - a neurological brain illustration with the title text"
-                  width={800}
-                  height={600}
-                  className="aspect-[4/3] w-full object-cover"
-                  priority
-                />
-                <p className="mt-3 font-sans text-base text-slate">
-                  Hardcover book. A 21-day protocol.
+          <div className="container-page hero__container">
+            <div className="hero__grid">
+              {/* Left Column: Authoritative Editorial Copy */}
+              <div className="hero__content">
+                <div className="hero__badge">
+                  <span className="hero__badge-dot" aria-hidden="true" />
+                  <span>{siteConfig.author}</span>
+                  <span className="hero__badge-sep">&bull;</span>
+                  <span>{siteConfig.authorRole}</span>
+                  <span className="hero__badge-sep">&bull;</span>
+                  <span>21-Day Neuroscience Protocol</span>
+                </div>
+
+                <h1 id="hero-title" className="hero__heading">
+                  It’s not your personality. <br />
+                  <span className="hero__heading-accent">
+                    It’s three locks in your brain.
+                  </span>
+                </h1>
+
+                <p className="hero__lead">
+                  Fear that freezes you. Comfort that drains you. A brain that
+                  ranks you low before you speak. Break all three in 21 days.
                 </p>
+
+                <div className="hero__actions">
+                  <BuyButton className="btn--lg">
+                    Get the hardcover, $97
+                  </BuyButton>
+                  <a href="#letter" className="hero__secondary-link">
+                    Read the author’s letter
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="hero__link-arrow"
+                    >
+                      <line x1="3" y1="8" x2="13" y2="8" />
+                      <polyline points="9 4 13 8 9 12" />
+                    </svg>
+                  </a>
+                </div>
+
+                {/* Key Inclusions Strip */}
+                <div className="hero__facts">
+                  <div className="hero__fact">
+                    <span className="hero__fact-label">Physical Edition</span>
+                    <strong className="hero__fact-value">Hardcover + journal</strong>
+                    <span className="hero__fact-sub">Included with every order.</span>
+                  </div>
+
+                  <div className="hero__fact-divider" aria-hidden="true" />
+
+                  <div className="hero__fact">
+                    <span className="hero__fact-label">Daily Commitment</span>
+                    <strong className="hero__fact-value">15–20 min / day</strong>
+                    <span className="hero__fact-sub">Three weeks, in fixed order.</span>
+                  </div>
+
+                  <div className="hero__fact-divider" aria-hidden="true" />
+
+                  <div className="hero__fact">
+                    <span className="hero__fact-label">Risk Reversal</span>
+                    <strong className="hero__fact-value">60-day refund</strong>
+                    <span className="hero__fact-sub">Stated plainly. No forms.</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Physical Hardcover Presentation */}
+              <div className="hero__visual">
+                <div className="hero-book-stage">
+                  <div className="hero-book-card">
+                    <div className="hero-book-frame">
+                      <Image
+                        src="/img/cover.jpg"
+                        alt="The Limitless Black Book physical hardcover edition by Farhan Khawaja, PhD."
+                        width={600}
+                        height={900}
+                        priority
+                        className="object-cover hero-book-img"
+                      />
+                    </div>
+                    <div className="hero-book-card__footer">
+                      <div className="hero-book-card__title">
+                        <strong>The Hardcover Edition</strong>
+                        <span>Archival Cloth Bound &bull; Debossed Gold Foil</span>
+                      </div>
+                      <span className="hero-book-card__price">$97</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* STATEMENT BAND */}
+        <section className="monograph-band" aria-label="Core Premise">
+          <div className="container-page monograph-band__inner">
+            <span className="monograph-band__line" aria-hidden="true" />
+            <p className="monograph-band__primary">
+              Three locks. Three weeks. About twenty minutes a day.
+            </p>
+            <p className="monograph-band__secondary">
+              No gym, no gadgets, no willpower speeches.
+            </p>
+            <span className="monograph-band__line" aria-hidden="true" />
+          </div>
+        </section>
+
+        {/* THE LETTER SECTION */}
         <section
           id="letter"
+          className="section section--letter"
           aria-labelledby="letter-title"
-          className="border-y border-line bg-surface"
         >
-          <div className="container-page py-16 md:py-32">
-            <div className="max-w-letter">
-              <h2
-                id="letter-title"
-                className="font-serif text-3xl text-paper"
-              >
-                Two men. Same start. Very different lives.
-              </h2>
-
-              <Media
-                src="/img/farhan.jpg"
-                alt="Farhan Khawaja, PhD neuroscientist author of The Limitless Black Book"
-                width={500}
-                height={625}
-                className="rounded-md mb-6"
-              />
-
-              <div className="mt-8 space-y-6 font-serif text-lg leading-[1.7] text-paper">
-                <p className="text-xl leading-[1.6]">
-                  Let me tell you about two men. One of them may sound a lot
-                  like you. They finished school in the same year. Both were
-                  bright. Both worked hard. Both had big plans.
+          <div className="container-page letter-spread">
+            {/* Aside: Author Authority */}
+            <aside className="letter-spread__aside">
+              <div className="letter-aside-sticky">
+                <span className="eyebrow">A Letter from Farhan</span>
+                <h2 id="letter-title" className="letter-spread__heading">
+                  Two men. <br />
+                  Same start. <br />
+                  Very different lives.
+                </h2>
+                <p className="letter-spread__sub">
+                  The clinical premise of the book, in the author’s own words.
                 </p>
+
+                <div className="letter-author-card">
+                  <div className="letter-author-avatar">
+                    <Image
+                      src="/img/farhan.jpg"
+                      alt="Farhan Khawaja, PhD"
+                      width={80}
+                      height={80}
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="letter-author-meta">
+                    <strong>Farhan Khawaja, PhD</strong>
+                    <span>Neuroscientist & Author</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            {/* Main Letter Body */}
+            <div className="letter-spread__body">
+              <div className="letter-paper">
+                <p className="letter-lead">
+                  Let me tell you about two men. One of them may sound a lot like
+                  you. They finished school in the same year. Both were bright.
+                  Both worked hard. Both had big plans.
+                </p>
+
                 <p>
                   Twenty-five years later, one of them is still waiting for
                   permission. He sits on his ideas, talks himself out of the
-                  raise, and goes home wondering why his life turned out
-                  smaller than he planned.
+                  raise, and goes home wondering why his life turned out smaller
+                  than he planned.
                 </p>
+
                 <p>
-                  The other one runs the room. He makes the call, asks for what
-                  he wants, and gets it. Same start. Same talent. Same
-                  twenty-four hours in a day. Very different lives.
+                  The other one runs the room. He makes the call, asks for what he
+                  wants, and gets it. Same start. Same talent. Same twenty-four
+                  hours in a day. Very different lives.
                 </p>
-                <p>
-                  The difference lies in what each man knew about his own
-                  brain, and what he did with that knowledge.
-                </p>
+
+                <blockquote className="letter-pullquote">
+                  <p>
+                    “The difference lies in what each man knew about his own
+                    brain, and what he did with that knowledge.”
+                  </p>
+                  <cite>&mdash; From the letter</cite>
+                </blockquote>
+
                 <p>
                   Your brain still runs on three old survival settings: Fear, a
                   threat alarm built for predators that now fires before every
                   hard conversation. Comfort, a dopamine loop that rewards the
-                  scroll, the snack and 'I'll do it tomorrow.' Status, a
-                  ranking system that decides, within seconds, how much space
-                  you are allowed to take in a room.
+                  scroll, the snack and ‘I’ll do it tomorrow.’ Status, a ranking
+                  system that decides, within seconds, how much space you are
+                  allowed to take in a room.
                 </p>
-                <p>
-                  Three locks, three weeks, about twenty minutes a day. No gym,
-                  no gadgets, no willpower speeches.
-                </p>
-                <p>
-                  Twenty-five years from now, which of those two men do you
-                  want to be?
-                </p>
-              </div>
 
-              <p className="mt-8 border-t border-line pt-6 font-serif text-lg text-paper">
-                Farhan Khawaja, PhD, neuroscientist
+                <p>
+                  Three locks, three weeks, about twenty minutes a day. No gym, no
+                  gadgets, no willpower speeches.
+                </p>
+
+                <div className="letter-footer">
+                  <p className="letter-question">
+                    Twenty-five years from now, which of those two men do you want
+                    to be?
+                  </p>
+                  <p className="letter-signoff">
+                    Farhan Khawaja, PhD <br />
+                    <span>Neuroscientist</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* THREE LOCKS SECTION (HERO MOVE: NEURAL PROTOCOL CONSOLE) */}
+        <section
+          id="locks"
+          className="section section--locks"
+          aria-labelledby="locks-title"
+        >
+          <div className="container-page">
+            <div className="section-intro">
+              <span className="eyebrow">Neurological Architecture</span>
+              <h2 id="locks-title" className="section-title">
+                Three locks. Three weeks.
+              </h2>
+              <p className="section-desc">
+                About twenty minutes a day. No gym, no gadgets, no willpower
+                speeches. Each week targets one primal survival setting with
+                protocols for the two minutes before you act.
               </p>
             </div>
+
+            <NeuralLocksConsole />
           </div>
         </section>
 
+        {/* 21 DAYS TIMELINE SECTION */}
         <section
-          id="three-locks"
-          aria-labelledby="locks-title"
-          className="container-page py-16 md:py-24"
-        >
-          <div className="max-w-[62ch]">
-            <h2 id="locks-title" className="font-serif text-3xl text-paper">
-              Three locks. Three weeks.
-            </h2>
-            <p className="mt-4 font-sans text-lg text-slate">
-              About twenty minutes a day. No gym, no gadgets, no willpower
-              speeches.
-            </p>
-          </div>
-
-          <LocksScroller
-            visuals={lockVisuals}
-            inlineVisuals={lockInlineVisuals}
-          />
-          <div className="mt-8 grid grid-cols-1 gap-4">
-            <Media
-              src="/img/fear.jpg"
-              alt="Fear lock illustration - key and lock imagery representing the fear survival setting"
-              width={400}
-              height={400}
-              className="border rounded-sm object-cover"
-            />
-            <Media
-              src="/img/comfort.jpg"
-              alt="Comfort lock illustration - dopamine loop and scrolling imagery representing the comfort survival setting"
-              width={400}
-              height={400}
-              className="border rounded-sm object-cover"
-            />
-            <Media
-              src="/img/status.jpg"
-              alt="Status lock illustration - crown and status symbols representing the status survival setting"
-              width={400}
-              height={400}
-              className="border rounded-sm object-cover"
-            />
-          </div>
-        </section>
-
-        <section
-          id="twenty-one-days"
+          id="days"
+          className="section section--days"
           aria-labelledby="days-title"
-          className="border-y border-line"
         >
-          <div className="container-page py-16 md:py-24">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-4">
-                <h2 id="days-title" className="font-serif text-3xl text-paper">
-                  The 21 days
-                </h2>
-                <p className="mt-4 font-sans text-lg text-slate">
-                  One sequence, in order. About twenty minutes a day.
-                </p>
-                <p className="mt-3 font-sans text-base text-slate">
-                  Day 1 gives you a baseline. Day 21 shows you what moved.
-                </p>
-              </div>
+          <div className="container-page">
+            <div className="section-intro">
+              <span className="eyebrow">The Sequential Regimen</span>
+              <h2 id="days-title" className="section-title">The 21 days</h2>
+              <p className="section-desc">
+                One sequence, strictly in order. Day 1 gives you a clinical baseline.
+                Day 21 proves what moved.
+              </p>
+            </div>
 
-              <div className="mt-12 lg:col-span-7 lg:col-start-6 lg:mt-0">
-                <ol className="ml-4 border-l border-line">
-                  {days.map((day, index) => {
-                    const dayImage = [
-                      "/img/day-1.jpg",
-                      "/img/week-1.jpg",
-                      "/img/week-2.jpg",
-                      "/img/week-3.jpg",
-                      "/img/week-1.jpg",
-                      "/img/week-2.jpg",
-                      "/img/week-3.jpg",
-                    ][index];
-                    return (
-                      <li
-                        key={day.label}
-                        className="relative pb-12 pl-8 last:pb-0"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="absolute -left-4 top-0 flex h-8 w-8 items-center justify-center rounded-sm border border-line bg-surface font-serif text-base tabular-nums text-paper"
-                        >
-                          {index + 1}
-                        </span>
-                        <p className="font-sans text-base text-slate">
-                          {day.label}
-                        </p>
-                        <h3 className="mt-2 font-serif text-xl text-paper">
-                          {day.title}
-                        </h3>
-                        <p className="mt-2 font-sans text-base text-paper">
-                          {day.body}
-                        </p>
-                        <Media
-                          src={dayImage}
-                          alt={`Day ${index + 1} of the 21-day protocol - visual progress illustration`}
-                          width={200}
-                          height={200}
-                          className="mt-4 rounded-md object-cover"
-                        />
-                      </li>
-                    )
-                  })}
-                </ol>
-              </div>
+            <div className="timeline-grid">
+              {days.map((day, index) => (
+                <div key={day.label} className="timeline-card">
+                  <div className="timeline-card__media">
+                    <Image
+                      src={day.image}
+                      alt={day.alt}
+                      fill
+                      sizes="(min-width: 1024px) 240px, 92vw"
+                      className="object-cover"
+                    />
+                    <span className="timeline-card__badge">{day.badge}</span>
+                  </div>
+
+                  <div className="timeline-card__content">
+                    <div className="timeline-card__step-header">
+                      <span className="timeline-card__step-num">
+                        Step 0{index + 1}
+                      </span>
+                      <strong className="timeline-card__step-label">
+                        {day.label}
+                      </strong>
+                    </div>
+
+                    <h3 className="timeline-card__step-title">{day.title}</h3>
+                    <p className="timeline-card__step-body">{day.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* INSIDE THE BOOK (CHAPTER ARCHIVE) */}
         <section
           id="inside"
+          className="section section--inside"
           aria-labelledby="inside-title"
-          className="container-page defer-render py-16 md:py-24"
         >
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
-              <h2 id="inside-title" className="font-serif text-3xl text-paper">
+          <div className="container-page">
+            <div className="section-intro">
+              <span className="eyebrow">Curriculum Dossier</span>
+              <h2 id="inside-title" className="section-title">
                 Inside the book
               </h2>
-              <p className="mt-4 font-sans text-lg text-slate">
-                Six chapters. Read in order.
-              </p>
+              <p className="section-desc">Six chapters. Read in order.</p>
             </div>
 
-            <div className="mt-12 lg:col-span-7 lg:col-start-6 lg:mt-0">
-              <ol className="border-t border-line">
-                {chapters.map((chapter, index) => (
-                  <li key={chapter.title} className="border-b border-line">
-                    <div className="flex items-center gap-6 py-4">
-                      <Media
-                        src={`/img/${["factory","key","routine","door"][index] || "factory"}.jpg`}
-                        alt={`Chapter ${index + 1} thumbnail - ${chapter.title}`}
-                        width={96}
-                        height={72}
-                        className="aspect-[4/3] w-24 shrink-0 object-cover border rounded-sm"
-                      />
-                      <div className="min-w-0">
-                        <p className="font-sans text-base text-slate">
-                          Chapter {index + 1}
-                        </p>
-                        <h3 className="mt-1 font-serif text-xl text-paper">
-                          {chapter.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+            <div className="chapters-grid">
+              {chapters.map((chapter) => (
+                <article key={chapter.num} className="chapter-card">
+                  <div className="chapter-card__thumb">
+                    <Image
+                      src={chapter.image}
+                      alt={`Chapter ${chapter.num}: ${chapter.title}`}
+                      fill
+                      sizes="160px"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  <div className="chapter-card__body">
+                    <span className="chapter-card__num">{chapter.num}</span>
+                    <h3 className="chapter-card__title">{chapter.title}</h3>
+                    <p className="chapter-card__desc">{chapter.desc}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* ABOUT THE AUTHOR SECTION */}
         <section
           id="author"
+          className="section section--author"
           aria-labelledby="author-title"
-          className="defer-render border-t border-line"
         >
-          <div className="container-page py-16 md:py-32">
-            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-5">
-                <Media
-                  src="/img/farhan.jpg"
-                  alt="Farhan Khawaja, PhD neuroscientist author of The Limitless Black Book"
-                  width={500}
-                  height={625}
-                  className="aspect-[4/5] w-full max-w-sm object-[50%_30%]"
-                />
+          <div className="container-page">
+            <div className="author-layout">
+              {/* Author Portrait */}
+              <div className="author-portrait-wrap">
+                <div className="author-portrait-frame">
+                  <Image
+                    src="/img/farhan.jpg"
+                    alt="Farhan Khawaja, PhD, neuroscientist and author of The Limitless Black Book."
+                    fill
+                    sizes="(min-width: 1024px) 440px, 92vw"
+                    className="object-cover"
+                  />
+                  <div className="author-portrait-badge">
+                    <span>Farhan Khawaja, PhD &bull; Neuroscientist</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="lg:col-span-6 lg:col-start-7">
-                <h2
-                  id="author-title"
-                  className="font-serif text-3xl text-paper"
-                >
-                  About the author
-                </h2>
-                <p className="mt-4 font-serif text-xl text-paper">
+              {/* Author Biography & Philosophy */}
+              <div className="author-bio">
+                <span className="eyebrow">Academic Credential</span>
+                <h2 id="author-title" className="author-bio__name">
                   Farhan Khawaja, PhD
+                </h2>
+                <p className="author-bio__role">
+                  Neuroscientist &bull; Behavioral Protocol Designer
                 </p>
 
-                <ul className="mt-8 divide-y divide-line border-y border-line">
-                  <li className="py-3 font-sans text-lg text-paper">
-                    Neuroscientist
-                  </li>
-                  <li className="py-3 font-sans text-lg text-paper">
-                    PhD, neuroscience
-                  </li>
-                  <li className="py-3 font-sans text-lg text-paper">
-                    Author of The Limitless Black Book
-                  </li>
-                </ul>
+                <div className="author-bio__specs">
+                  <div className="author-spec-item">
+                    <span className="author-spec-label">Scientific Discipline</span>
+                    <strong className="author-spec-value">Neuroscience</strong>
+                  </div>
+                  <div className="author-spec-item">
+                    <span className="author-spec-label">Academic Degree</span>
+                    <strong className="author-spec-value">PhD</strong>
+                  </div>
+                  <div className="author-spec-item">
+                    <span className="author-spec-label">Core Publication</span>
+                    <strong className="author-spec-value">The Limitless Black Book</strong>
+                  </div>
+                </div>
 
-                <blockquote className="mt-8 max-w-[48ch] font-serif text-xl leading-[1.5] text-paper">
-                  "Three locks, three weeks, about twenty minutes a day. No gym,
-                  no gadgets, no willpower speeches."
+                <blockquote className="author-quote-box">
+                  <p>
+                    “Three locks, three weeks, about twenty minutes a day. No gym,
+                    no gadgets, no willpower speeches.”
+                  </p>
+                  <footer>&mdash; Farhan Khawaja, PhD</footer>
                 </blockquote>
               </div>
             </div>
           </div>
         </section>
 
+        {/* TESTIMONIALS & READER EVIDENCE */}
         <section
           id="proof"
+          className="section section--proof"
           aria-labelledby="proof-title"
-          className="defer-render border-t border-line"
         >
-          <div className="container-page py-16 md:py-24">
-            <h2 id="proof-title" className="font-serif text-3xl text-paper">
-              What readers say
-            </h2>
-
-            <div className="mt-12 max-w-3xl border-t border-line">
-              {testimonials.map((testimonial) => (
-                <figure
-                  key={testimonial.name}
-                  className="border-b border-line py-8"
-                >
-                  <blockquote className="max-w-[52ch] font-serif text-xl leading-[1.5] text-paper">
-                    " {testimonial.quote}"
-                  </blockquote>
-                  <figcaption className="mt-4 font-sans text-base text-slate">
-                    <span className="text-paper">{testimonial.name}</span>,{" "}
-                    {testimonial.detail}
-                  </figcaption>
-                </figure>
-              ))}
+          <div className="container-page">
+            <div className="section-intro">
+              <span className="eyebrow">Reader Evidence</span>
+              <h2 id="proof-title" className="section-title">
+                What readers say
+              </h2>
+              <p className="section-desc">Three readers, in their own words.</p>
             </div>
 
-            <p className="mt-8 border-t border-line pt-6 font-sans text-base text-paper">
+            <div className="proof-grid">
+              {testimonials.map((testimonial, idx) => {
+                const media = readerMedia[idx];
+                return (
+                  <div key={testimonial.name} className="proof-card">
+                    {media.photo ? (
+                      <div className="proof-card__media">
+                        <Image
+                          src={media.photo}
+                          alt={media.photoAlt}
+                          fill
+                          sizes="(min-width: 900px) 360px, 92vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="proof-card__media-placeholder">
+                        <div className="proof-card__trustpilot-badge">
+                          Verified Review
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="proof-card__body">
+                      <blockquote className="proof-card__quote">
+                        “{testimonial.quote}”
+                      </blockquote>
+
+                      <div className="proof-card__person">
+                        {media.avatar ? (
+                          <div className="proof-card__avatar">
+                            <Image
+                              src={media.avatar}
+                              alt=""
+                              width={44}
+                              height={44}
+                              className="object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="proof-card__avatar-init">
+                            MG
+                          </div>
+                        )}
+                        <div>
+                          <strong className="proof-card__name">
+                            {testimonial.name}
+                          </strong>
+                          <span className="proof-card__detail">
+                            {testimonial.detail}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Community Gallery Strip */}
+            <div className="community-strip">
+              <div className="community-strip__header">
+                <span className="community-strip__badge">Private Readers Circle</span>
+                <p>Direct peer support & protocol execution across the 21 days.</p>
+              </div>
+              <div className="community-strip__images">
+                <div className="community-strip__img-frame">
+                  <Image
+                    src="/img/group-1.jpg"
+                    alt="Readers in discussion group"
+                    fill
+                    sizes="300px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="community-strip__img-frame">
+                  <Image
+                    src="/img/group-2.jpg"
+                    alt="Readers sharing protocol notes"
+                    fill
+                    sizes="300px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="community-strip__img-frame">
+                  <Image
+                    src="/img/group-3.jpg"
+                    alt="Community members interacting"
+                    fill
+                    sizes="300px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <p className="disclaimer-note">
               Individual results. Your results depend on the work you put in.
             </p>
           </div>
         </section>
 
+        {/* DIAGNOSTIC COMPARISON SECTION */}
         <section
           id="comparison"
+          className="section section--comparison"
           aria-labelledby="comparison-title"
-          className="defer-render border-y border-line"
         >
-          <div className="container-page py-16 md:py-24">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-4">
-                <h2
-                  id="comparison-title"
-                  className="font-serif text-3xl text-paper"
-                >
-                  How it compares
-                </h2>
-                <p className="mt-4 font-sans text-lg text-slate">
-                  The difference is in structure and practice.
-                </p>
-              </div>
-
-              <div className="mt-12 overflow-x-auto lg:col-span-7 lg:col-start-6 lg:mt-0">
-                <table className="w-full table-fixed border-collapse text-left">
-                  <caption className="sr-only">
-                    A comparison of The Limitless Black Book and most self-help
-                    books
-                  </caption>
-                  <thead>
-                    <tr className="border-y border-line">
-                      <th
-                        scope="col"
-                        className="w-1/2 py-4 pr-4 font-sans text-base font-semibold text-paper"
-                      >
-                        This book
-                      </th>
-                      <th
-                        scope="col"
-                        className="w-1/2 py-4 pl-4 font-sans text-base font-semibold text-slate"
-                      >
-                        Most self-help books
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {comparisonRows.map((row) => (
-                      <tr
-                        key={row.ours}
-                        className="border-b border-line align-top"
-                      >
-                        <td className="py-4 pr-4 font-sans text-base text-paper lg:text-lg">
-                          {row.ours}
-                        </td>
-                        <td className="py-4 pl-4 font-sans text-base text-slate lg:text-lg">
-                          {row.theirs}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div className="container-page">
+            <div className="section-intro">
+              <span className="eyebrow">Diagnostic Evaluation</span>
+              <h2 id="comparison-title" className="section-title">
+                How it compares
+              </h2>
+              <p className="section-desc">
+                The fundamental distinction lies in structure and active practice.
+              </p>
             </div>
+
+            <DiagnosticMatrix rows={comparisonRows} />
           </div>
         </section>
 
+        {/* THE OFFER / UNBOXING SECTION */}
         <section
           id="offer"
+          className="section section--offer"
           aria-labelledby="offer-title"
-          className="defer-render container-page py-16 md:py-32"
         >
-          <div className="border border-line bg-surface">
-            <div className="grid lg:grid-cols-12">
-              <div className="flex items-center justify-center border-b border-line p-6 md:p-8 lg:col-span-5 lg:border-b-0 lg:border-r lg:p-12">
-                <Media
-                  src="/img/cover.jpg"
-                  alt="The Limitless Black Book cover"
-                  width={400}
-                  height={500}
-                  className="aspect-[4/5] w-full max-w-sm object-[50%_42%]"
-                  sizes="(min-width: 1024px) 34vw, (min-width: 768px) 50vw, 90vw"
-                />
-              </div>
-
-              <div className="p-6 md:p-8 lg:col-span-7 lg:p-12">
-                <h2
-                  id="offer-title"
-                  className="font-serif text-3xl text-paper"
-                >
-                  What you get
-                </h2>
-
-                <ul className="mt-8 border-t border-line">
-                  <li className="border-b border-line py-4">
-                    <p className="font-serif text-xl text-paper">
-                      The hardcover
-                    </p>
-                    <p className="mt-1 font-sans text-base text-slate">
-                      The full 21-day protocol, printed and bound.
-                    </p>
-                  </li>
-                  <li className="border-b border-line py-4">
-                    <p className="font-serif text-xl text-paper">
-                      The field journal
-                    </p>
-                    <p className="mt-1 font-sans text-base text-slate">
-                      Free with every order.
-                    </p>
-                  </li>
-                  <li className="border-b border-line py-4">
-                    <p className="font-serif text-xl text-paper">
-                      Private members group
-                    </p>
-                    <p className="mt-1 font-sans text-base text-slate">
-                      For readers of the book.
-                    </p>
-                  </li>
-                </ul>
-
-                <div className="mt-8 flex items-end gap-4">
-                  <p className="font-serif text-3xl leading-none text-paper">
-                    <span className="sr-only">Sale price </span>
-                    <span className="tabular-nums">$97</span>
-                  </p>
-                  <p className="font-sans text-lg leading-none text-slate">
-                    <span className="sr-only">Regular price </span>
-                    <s className="tabular-nums">$179</s>
-                  </p>
-                  <Media
-                    src="/img/book-standing.jpg"
-                    alt="Hardcover book standing on a surface"
-                    width={400}
-                    height={500}
-                    className="hidden lg:block"
+          <div className="container-page">
+            <div className="offer-showcase">
+              {/* Product Visual Left */}
+              <div className="offer-showcase__media">
+                <div className="offer-showcase__badge">
+                  Hardcover Edition + Field Journal
+                </div>
+                <div className="offer-showcase__img-wrap">
+                  <Image
+                    src="/img/book-and-journal.jpg"
+                    alt="The Limitless Black Book hardcover beside the black field journal."
+                    width={1200}
+                    height={800}
+                    className="object-cover offer-showcase__img"
                   />
                 </div>
-                <p className="mt-3 font-sans text-base text-slate">
-                  Free shipping to the US, UK and Europe.
+              </div>
+
+              {/* Offer Details Right */}
+              <div className="offer-showcase__details">
+                <span className="eyebrow">Physical Package</span>
+                <h2 id="offer-title" className="offer-showcase__title">
+                  The Edition
+                </h2>
+                <p className="offer-showcase__lead">
+                  The full 21-day protocol, printed and archival bound. The field
+                  journal comes with it.
                 </p>
 
-                <div className="mt-6">
-                  <BuyButton />
+                <div className="offer-inclusions">
+                  <div className="offer-inclusion-item">
+                    <span className="offer-inclusion-check" aria-hidden="true">&check;</span>
+                    <div>
+                      <strong>The Hardcover</strong>
+                      <p>The full 21-day protocol, printed and bound.</p>
+                    </div>
+                  </div>
+
+                  <div className="offer-inclusion-item">
+                    <span className="offer-inclusion-check" aria-hidden="true">&check;</span>
+                    <div>
+                      <strong>The Field Journal</strong>
+                      <p>Free with every order.</p>
+                    </div>
+                  </div>
+
+                  <div className="offer-inclusion-item">
+                    <span className="offer-inclusion-check" aria-hidden="true">&check;</span>
+                    <div>
+                      <strong>Private Members Group</strong>
+                      <p>For readers of the book.</p>
+                    </div>
+                  </div>
                 </div>
 
-                <p className="mt-4 max-w-[54ch] font-sans text-base text-paper">
-                  60-day refund. Do the 21 days. If you don't feel the
-                  difference, email{" "}
-                  <a href={`mailto:${siteConfig.email}`} className="link">
-                    {siteConfig.email}
-                  </a>{" "}
-                  within 60 days of your order and we'll refund every cent.
-                </p>
+                <div className="offer-pricing-box">
+                  <div className="offer-pricing-row">
+                    <span className="sr-only">Sale price </span>
+                    <strong className="offer-price-active">$97</strong>
+                    <s className="offer-price-strike">
+                      <span className="sr-only">Regular price </span>$179
+                    </s>
+                    <span className="offer-save-tag">Save $82 &bull; 46% Off</span>
+                  </div>
+                  <BuyButton className="btn--lg w-full justify-center">
+                    Get the hardcover, $97
+                  </BuyButton>
+                </div>
+
+                <div className="offer-guarantee-seal">
+                  <div className="offer-guarantee-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  </div>
+                  <p className="offer-fine-print">
+                    Free shipping to the US, UK and Europe. 60-day refund. Do
+                    the 21 days. If you don’t feel the difference, email{" "}
+                    <a href={`mailto:${siteConfig.email}`} className="link">
+                      {siteConfig.email}
+                    </a>{" "}
+                    within 60 days of your order and we’ll refund every cent.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* FAQ SECTION */}
         <section
           id="faq"
+          className="section section--faq"
           aria-labelledby="faq-title"
-          className="defer-render container-page py-16 md:py-24"
         >
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
-              <h2 id="faq-title" className="font-serif text-3xl text-paper">
+          <div className="container-page faq-spread">
+            <div className="faq-spread__aside">
+              <span className="eyebrow">Clear Answers</span>
+              <h2 id="faq-title" className="faq-spread__title">
                 Questions and answers
               </h2>
-              <p className="mt-4 font-sans text-lg text-slate">
-                Short answers to the things people ask before they start.
+              <p className="faq-spread__lead">
+                Short, unambiguous answers to the things people ask before they start.
               </p>
             </div>
 
-            <div className="faq mt-12 lg:col-span-7 lg:col-start-6 lg:mt-0">
-              {faqs.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="border-t border-line last:border-b"
-                >
-                  <summary>
-                    <span className="font-serif text-xl text-paper">
-                      {faq.question}
-                    </span>
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      className="faq-icon"
-                    >
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <line
-                        x1="12"
-                        y1="5"
-                        x2="12"
-                        y2="19"
-                        className="faq-icon__vertical"
-                      />
-                    </svg>
-                  </summary>
-                  <div className="pb-6 font-sans text-lg text-slate">
-                    {faq.question === "How does the guarantee work?" ? (
-                      <p>
-                        Email{" "}
-                        <a
-                          href={`mailto:${siteConfig.email}`}
-                          className="link"
-                        >
-                          {siteConfig.email}
-                        </a>{" "}
-                        within 60 days of your order and we'll refund every
-                        cent.
-                      </p>
-                    ) : (
-                      <p>{faq.answer}</p>
-                    )}
-                  </div>
-                </details>
-              ))}
+            <div className="faq-spread__content">
+              <FAQAccordion items={faqs} />
             </div>
           </div>
         </section>
 
+        {/* FINALE SECTION */}
         <section
           id="start"
+          className="section-finale"
           aria-labelledby="start-title"
-          className="defer-render relative isolate overflow-hidden border-y border-line"
         >
-          <div className="absolute inset-0 -z-20">
-            <Media
+          <div className="section-finale__bg" aria-hidden="true">
+            <Image
               src="/img/door.jpg"
-              alt="Door illustration representing the final call to start the 21-day protocol"
-              width={1200}
-              height={800}
-              className="h-full w-full object-cover"
-              priority
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover section-finale__bg-img"
             />
+            <div className="section-finale__veil" />
           </div>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-ink/85 md:bg-gradient-to-r md:from-ink md:via-ink/90 md:to-ink/25"
-          />
-          <div className="container-page py-24 md:py-32">
-            <div className="max-w-[46rem]">
-              <h2
-                id="start-title"
-                className="font-serif text-3xl text-paper md:text-4xl"
-              >
+
+          <div className="container-page section-finale__container">
+            <div className="section-finale__card">
+              <span className="eyebrow justify-center">The Threshold</span>
+              <h2 id="start-title" className="section-finale__heading">
                 Start Day 1 tonight.
               </h2>
-              <p className="mt-4 font-sans text-lg text-paper">
+              <p className="section-finale__lead">
                 21 days. About twenty minutes a day.
               </p>
-              <div className="mt-8">
-                <BuyButton />
+
+              <div className="section-finale__actions">
+                <BuyButton className="btn--lg">
+                  Get the hardcover, $97
+                </BuyButton>
+                <a href="#offer" className="hero__secondary-link">
+                  See what’s inside
+                </a>
               </div>
+
+              <p className="section-finale__terms">
+                Hardcover and field journal included. 60-day refund. Free shipping
+                to the US, UK and Europe.
+              </p>
             </div>
           </div>
         </section>
