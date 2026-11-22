@@ -1,20 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Newsreader } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-serif",
-  adjustFontFallback: true,
-  axes: ["opsz"],
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  display: "swap",
+const generalSans = localFont({
+  src: [
+    {
+      path: "./fonts/GeneralSans-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/GeneralSans-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/GeneralSans-Semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/GeneralSans-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-sans",
-  adjustFontFallback: true,
+  display: "swap",
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
 });
 
 const siteUrl =
@@ -23,7 +36,7 @@ const siteUrl =
 const noindex = process.env.NEXT_PUBLIC_NOINDEX === "true";
 
 const description =
-  "It’s not your personality. It’s three locks in your brain. A 21-day protocol for fear, comfort and status, by neuroscientist Farhan Khawaja, PhD.";
+  "Fear freezes you. Comfort drains you. Status shrinks you. Break all three locks in 21 days with a protocol from neuroscientist Farhan Khawaja, PhD.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -71,15 +84,15 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "dark",
-  themeColor: "#050b14",
+  colorScheme: "light",
+  themeColor: "#f4f2ec",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${geist.variable}`}>
+    <html lang="en" className={generalSans.variable}>
       <body>
         <a href="#main-content" className="skip-link">
           Skip to content

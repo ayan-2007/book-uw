@@ -1,7 +1,7 @@
 import { siteConfig } from "@/lib/site";
 
 type BuyButtonProps = {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "inverse";
   className?: string;
   onClick?: () => void;
   children?: React.ReactNode;
@@ -13,7 +13,12 @@ export function BuyButton({
   onClick,
   children,
 }: BuyButtonProps) {
-  const variantClass = variant === "primary" ? "btn-primary" : "btn-secondary";
+  const variantClass =
+    variant === "inverse"
+      ? "btn-inverse"
+      : variant === "secondary"
+        ? "btn-secondary"
+        : "btn-primary";
 
   return (
     <a

@@ -1,102 +1,96 @@
 # Design system
 
-The site is art-directed as **dark luxury editorial × cinematic neuroscience**.
-The goal is a quiet, expensive reading experience: a deep ink field, warm paper
-type, restrained antique gold, and imagery that carries the emotional weight.
+The site is art-directed as a **warm editorial gallery**: porcelain paper, ink
+type, one cobalt accent, soft geometry, and a single dark plate for the live
+mosaic. It should feel like a small printed monograph, not a SaaS landing page.
 
 ## Palette
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--bg` | `#05080e` | Page field |
-| `--surface` | `#0a111c` | Section surfaces |
-| `--surface-raised` | `#101928` | Raised panels |
-| `--panel` | `#0d1522` | Media wells |
-| `--border` | `#1a273a` | Rules and frames |
-| `--text` | `#f5f2eb` | Primary text — warm paper, never pure white |
-| `--text-muted` | `#8c9cb0` | Secondary copy |
-| `--text-dim` | `#5c6c80` | Tertiary labels |
-| `--accent` | `#cfa85b` | Antique gold — actions, markers, small emphasis |
-| `--accent-hover` | `#e5be70` | Hover state |
-| `--danger` | `#e06c60` | Error state |
+| `--bg` | `#f4f2ec` | Page field |
+| `--bg-deep` | `#ebe8df` | Footer, inset surfaces |
+| `--surface` | `#fbfaf6` | Cards, tinted sections |
+| `--surface-raised` | `#ffffff` | Raised panels |
+| `--text` | `#141519` | Primary text |
+| `--text-muted` | `#5e6067` | Secondary copy |
+| `--text-dim` | `#86878d` | Tertiary labels |
+| `--border` | `#dcd8cd` | Hairlines |
+| `--border-strong` | `#c7c2b5` | Secondary button borders |
+| `--accent` | `#1f4fd8` | Actions, markers, links |
+| `--accent-hover` | `#173fb3` | Hover state |
+| `--accent-soft` | `#e8edfb` | Check chips, save badge |
+| `--dark` | `#0d0f13` | Mosaic plate, final CTA |
+| `--dark-text` | `#f6f3eb` | Type on dark |
 
-Gold is a material, not a theme. It appears in thin rules, protocol bullets,
-prices, focus rings and one or two words of display type. It never fills large
-areas except the primary button and the offer panel's paper field.
+Cobalt is a working accent, not a theme. It appears in the kicker rule, links,
+the primary button, the phase dots and the mosaic pause control. It never fills
+a large area except the primary button.
 
 ## Typography
 
-- **Newsreader** — display and editorial voice. Headlines, the author letter,
-  pull quotes, chapter names, prices and timeline numerals. Loaded as a variable
-  font with the `opsz` axis so large sizes optically tighten.
-- **Geist** — body, navigation, buttons, FAQ, forms and captions.
+- **General Sans** for everything. Self-hosted WOFF2, weights 400 / 500 / 600 /
+  700, loaded through `next/font/local`.
+- Display headlines use 600 weight, `letter-spacing: -0.035em` to `-0.052em`,
+  and a line height near `0.98`.
+- Body copy is `1rem / 1.6`, capped at `64ch`. Secondary copy uses
+  `--text-muted`.
+- Prices, day ranges and lock numbers use `font-variant-numeric: tabular-nums`.
+- No all-caps labels, no second display typeface, no gradient text.
 
-Rules:
+## Layout
 
-- Body copy is `1rem / 1.65` and never wider than about `65ch`.
-- Editorial paragraphs stay near `62ch`.
-- Headlines use `font-optical-sizing: auto`, `letter-spacing: -0.02em` and a
-  tight but readable line height.
-- Prices and timeline numbers use `font-variant-numeric: tabular-nums`.
-- Buttons and navigation use sentence case. No all-caps labels as a default.
+- Page container: `76rem` max, gutters `clamp(20px, 5vw, 48px)`.
+- Section rhythm: `--section-y: clamp(4.5rem, 8vw, 8rem)`; tight sections use
+  `clamp(3.5rem, 6vw, 5.5rem)`.
+- Radii: 10 / 18 / 28 / 40px plus full pills. Large media and cards use 28–40px.
+- Rules are 1px and low contrast. Sections are separated by rhythm and hairlines,
+  not by boxing every block.
+- Shadows are soft and rare: one for the mosaic plate, one for the offer card.
 
-## Spacing and layout
+## Page rhythm
 
-- A 4px spacing scale (`--space-1` through `--space-10`) drives all layout.
-- The page container is capped at `77.5rem` (1240px) with fluid gutters.
-- Sections use `--section-y: clamp(5rem, 8vw, 8.5rem)` so the page breathes on
-  desktop without becoming sparse on mobile.
-- The main reading column, letter column, timeline and offer use asymmetric
-  grids rather than a centered stack.
-- Rules are 1px and low contrast; they divide without boxing every section.
-
-## Section rhythm
-
-1. **Hero** — full-bleed brain atmosphere, editorial headline, framed hardcover,
-   key inclusions.
-2. **Statement band** — one decisive line of display type.
-3. **The letter** — sticky author aside beside a long-form letter with a drop
-   cap and pull quote.
-4. **Three locks** — the signature interaction: a neural protocol console that
-   stays pinned while the three lock panels scroll past.
-5. **21 days** — a ruled timeline with tabular day numbers and image evidence.
-6. **Inside the book** — a chapter archive with small portrait plates.
-7. **Author** — a dark portrait plate and a factual credentials list.
-8. **Reader evidence** — three quotes with photography, avatars and attribution.
-9. **Comparison** — a two-column diagnostic table, stacked into labelled rows on
-   small screens.
-10. **The offer** — a warm paper panel, the physical edition, price, refund and
-    shipping facts.
-11. **FAQ** — native `<details>` accordions with a thin plus/minus indicator.
-12. **Finale** — the doorway image, one last call to start Day 1.
-13. **Footer and sticky buy bar** — short paths to purchase and policies.
+1. **Hero** — kicker, oversized headline, short lead, two actions, one note, and
+   the live Vignette Bloom mosaic.
+2. **The three locks** — an editorial table: number, lock name, description,
+   week and outcome.
+3. **The 21 days** — three phases on a ruled timeline, then one practice note.
+4. **One reader** — a single photo, oversized quote, avatar and honest
+   disclaimer on a tinted band.
+5. **The edition** — split product card with the hardcover, inclusions, price,
+   refund copy and author.
+6. **FAQ** — a two-column layout with native button disclosures.
+7. **Final CTA** — one dark panel, one action, one line of terms.
+8. **Footer** — wordmark, two short link groups, legal line, copyright.
+9. **Sticky buy bar** — mobile only, appears after the hero.
 
 ## Motion
 
-- One orchestrated entrance in the hero; no repeated scroll-triggered fades.
-- The three-lock console crossfades imagery as each panel enters the viewport.
-- Motion uses a single easing curve, `cubic-bezier(0.22, 1, 0.36, 1)`, at
-  140ms, 240ms or 420ms.
-- `prefers-reduced-motion` reduces animations and transitions to effectively
-  zero and disables smooth scrolling.
+- One easing curve: `cubic-bezier(0.22, 1, 0.36, 1)`.
+- Durations: 140ms for color and border, 220ms for layout-adjacent changes,
+  400ms for larger transitions.
+- No repeated scroll-triggered fades. The page loads still.
+- The mosaic runs at a 30fps cap, pauses offscreen and when the tab is hidden.
+- `prefers-reduced-motion: reduce` starts the mosaic paused and removes
+  non-essential transitions. The pause/play control lets the reader opt in.
 
 ## Accessibility
 
-- Skip link to `#main-content`.
-- Visible `:focus-visible` ring in antique gold.
-- Semantic landmarks, heading order and `<figure>`/`<figcaption>` for media.
-- Decorative images use empty alt text; meaningful images describe the subject.
-- All controls keep a minimum 44–48px touch target.
-- Text contrast is checked against the ink surfaces; muted copy is reserved for
-  secondary information.
-- Native `<details>` powers the FAQ so it works without JavaScript.
+- Body text meets WCAG AA on the paper field; muted text stays above 4.5:1.
+- Focus rings are 2px cobalt with a 3px offset.
+- A skip link is the first focusable element.
+- Buttons and nav links are at least 44px tall on touch.
+- The mosaic canvas has `role="img"` and a descriptive label; a real image
+  fallback sits underneath.
+- The mobile menu is a disclosure with `aria-expanded`, `aria-controls`, Escape
+  to close, and a body scroll lock.
+- Prices are paired with visible labels, not color alone.
 
-## Responsive behavior
+## Image treatment
 
-- 375px is the narrow reference width: no horizontal overflow, and the hero
-  headline resolves to three lines.
-- Navigation collapses to a full-screen menu below 1024px.
-- The sticky purchase bar appears on mobile after the hero and hides on desktop.
-- The comparison table becomes a stack of labelled rows below 640px.
-- The three-lock console shows one inline image per lock on mobile instead of
-  the pinned desktop visual.
+- The hero uses a 4:3 dark plate with a 28px radius, a 1px white border at 8%
+  opacity, and a deep shadow. The source photo is cropped with cover behavior.
+- Reader and product photography use soft 18–28px corners.
+- Product photography is displayed with `object-fit: cover`; choose a source
+  whose subject survives the column crop. The offer uses the portrait
+  `hardcover.jpg` rather than the wide `book-and-journal.jpg`.

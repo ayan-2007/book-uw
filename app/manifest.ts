@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "A 21-day neuroscience protocol for fear, comfort and status, by Farhan Khawaja, PhD.",
     start_url: "/",
     display: "standalone",
-    background_color: "#05080e",
-    theme_color: "#05080e",
+    background_color: "#f4f2ec",
+    theme_color: "#f4f2ec",
     icons: [
       {
         src: "/icon.svg",

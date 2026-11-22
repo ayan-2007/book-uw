@@ -1,39 +1,35 @@
 import { siteConfig } from "@/lib/site";
 
 const protocolLinks = [
-  { label: "The Letter", href: "#letter" },
-  { label: "Three Locks", href: "#locks" },
-  { label: "The 21 Days", href: "#days" },
-  { label: "Inside the Book", href: "#inside" },
-  { label: "Clinical Comparison", href: "#comparison" },
+  { label: "The three locks", href: "/#locks" },
+  { label: "The 21 days", href: "/#days" },
+  { label: "The edition", href: "/#offer" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 const policyLinks = [
-  { label: "Direct Support", href: `mailto:${siteConfig.email}` },
-  { label: "Privacy Policy", href: "/policies#privacy" },
-  { label: "Terms of Service", href: "/policies#terms" },
-  { label: "60-Day Guarantee", href: "/policies#refund-policy" },
-  { label: "Worldwide Shipping", href: "/policies#shipping" },
+  { label: "Email us", href: `mailto:${siteConfig.email}` },
+  { label: "Privacy", href: "/policies#privacy" },
+  { label: "Terms", href: "/policies#terms" },
+  { label: "Refunds", href: "/policies#refund-policy" },
+  { label: "Shipping", href: "/policies#shipping" },
 ];
 
 export function SiteFooter() {
   return (
     <footer className="footer">
-      <div className="container-page">
+      <div className="container">
         <div className="footer__grid">
-          <div className="footer__brand-col">
+          <div className="footer__brand">
             <span className="footer__wordmark">{siteConfig.name}</span>
             <p className="footer__tagline">
-              A 21-day clinical neuroscience protocol targeting the three primal survival
-              locks: Fear, Comfort, and Status. Author: {siteConfig.author}, {siteConfig.authorRole}.
+              A 21-day protocol for fear, comfort and status, by{" "}
+              {siteConfig.author}.
             </p>
-            <div className="footer__badge">
-              <span>Standard Edition &bull; Archival Hardcover + Field Journal</span>
-            </div>
           </div>
 
-          <div className="footer__col">
-            <h3 className="footer__heading">Navigation</h3>
+          <div>
+            <h3 className="footer__heading">Read</h3>
             <ul className="footer__list">
               {protocolLinks.map((link) => (
                 <li key={link.href}>
@@ -45,8 +41,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="footer__col">
-            <h3 className="footer__heading">Support & Guarantee</h3>
+          <div>
+            <h3 className="footer__heading">Support</h3>
             <ul className="footer__list">
               {policyLinks.map((link) => (
                 <li key={link.label}>
@@ -61,10 +57,11 @@ export function SiteFooter() {
 
         <div className="footer__bottom">
           <p className="footer__legal">
-            Educational material based on neuroscience. Not medical advice or treatment. If managing clinical anxiety or medical conditions, consult your physician.
+            Educational material, not medical advice. If you’re managing a
+            medical condition, keep working with your doctor.
           </p>
           <p className="footer__copy">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name}
           </p>
         </div>
       </div>

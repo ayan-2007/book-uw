@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { siteConfig } from "@/lib/site";
 
 export function StickyBuyBar({ checkoutUrl }: { checkoutUrl: string }) {
   const [visible, setVisible] = useState(false);
@@ -27,42 +25,16 @@ export function StickyBuyBar({ checkoutUrl }: { checkoutUrl: string }) {
   if (!visible) return null;
 
   return (
-    <aside
-      aria-label="Quick purchase order bar"
-      className="sticky-buy"
-    >
-      <div className="container-page sticky-buy__inner">
-        <div className="sticky-buy__book">
-          <div className="sticky-buy__thumb">
-            <Image
-              src="/img/cover.jpg"
-              alt="The Limitless Black Book cover"
-              width={40}
-              height={56}
-              className="object-cover"
-            />
-          </div>
-          <div className="sticky-buy__info">
-            <div className="sticky-buy__title-row">
-              <strong className="sticky-buy__title">{siteConfig.name}</strong>
-              <span className="sticky-buy__tag">Hardcover + Journal</span>
-            </div>
-            <div className="sticky-buy__price-row">
-              <strong className="sticky-buy__price">$97</strong>
-              <s className="sticky-buy__strike">$179</s>
-              <span className="sticky-buy__badge">Save $82 &bull; Free Shipping</span>
-            </div>
-          </div>
+    <aside aria-label="Quick purchase bar" className="sticky-buy">
+      <div className="container sticky-buy__inner">
+        <div className="sticky-buy__price">
+          <strong>$97</strong>
+          <span>Hardcover + journal</span>
         </div>
 
-        <div className="sticky-buy__action">
-          <a
-            href={checkoutUrl}
-            className="btn btn-primary btn--sticky"
-          >
-            Claim the Hardcover — $97
-          </a>
-        </div>
+        <a href={checkoutUrl} className="btn btn-primary btn--sticky">
+          Get the book
+        </a>
       </div>
     </aside>
   );

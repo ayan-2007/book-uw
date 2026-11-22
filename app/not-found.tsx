@@ -3,22 +3,30 @@ import { SiteHeader } from "@/components/site-header";
 
 export default function NotFound() {
   return (
-    <div id="top">
+    <div id="top" className="site-wrapper">
       <SiteHeader showBuy={false} />
-      <main id="main-content" className="container-page py-24 md:py-32">
-        <div className="max-w-letter">
-          <h1 className="font-serif text-3xl text-paper">Page not found</h1>
-          <p className="mt-4 font-sans text-lg text-paper">
-            The page you’re looking for doesn’t exist. The book and its policies
-            are still here.
-          </p>
-          <div className="mt-8">
-            <a href="/" className="btn btn-secondary">
-              Go to the homepage
-            </a>
+
+      <main id="main-content" className="page">
+        <div className="container">
+          <div className="page__header">
+            <span className="kicker">404</span>
+            <h1 className="page__title">Page not found</h1>
+            <p className="page__lead">
+              The page you’re looking for doesn’t exist. The book and its
+              policies are still here.
+            </p>
+            <div className="hero__actions">
+              <a href="/" className="btn btn-primary">
+                Go to the homepage
+              </a>
+              <a href="/policies" className="btn btn-ghost">
+                Read the policies
+              </a>
+            </div>
           </div>
         </div>
       </main>
+
       <SiteFooter />
     </div>
   );

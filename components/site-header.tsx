@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { BuyButton } from "@/components/buy-button";
-import { Countdown } from "@/components/countdown";
 import { siteConfig } from "@/lib/site";
 
 type SiteHeaderProps = {
@@ -10,22 +9,18 @@ type SiteHeaderProps = {
 };
 
 const navLinks = [
-  { href: "#letter", label: "The Letter" },
-  { href: "#locks", label: "Three Locks" },
-  { href: "#days", label: "21 Days" },
-  { href: "#inside", label: "Inside the Book" },
-  { href: "#author", label: "The Author" },
-  { href: "#comparison", label: "Comparison" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#locks", label: "The locks" },
+  { href: "/#days", label: "21 days" },
+  { href: "/#offer", label: "The edition" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function SiteHeader({ showBuy = true }: SiteHeaderProps) {
-  const saleEnd = process.env.NEXT_PUBLIC_SALE_END?.trim();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -58,17 +53,15 @@ export function SiteHeader({ showBuy = true }: SiteHeaderProps) {
         .join(" ")
         .trim()}
     >
-      <div className="container-page site-header__inner">
+      <div className="container site-header__inner">
         <a
           href="/"
-          className="site-header__wordmark"
+          className="brand"
+          aria-label={`${siteConfig.name} — home`}
           onClick={() => setOpen(false)}
         >
-          <span className="site-header__title">{siteConfig.name}</span>
-          <span className="site-header__subtitle">
-            <span className="site-header__dot" aria-hidden="true" />
-            {siteConfig.author} &bull; {siteConfig.authorRole}
-          </span>
+          <span className="brand__name">{siteConfig.name}</span>
+          <span className="brand__sub">{siteConfig.author}</span>
         </a>
 
         <nav className="site-nav" aria-label="Primary navigation">
@@ -80,12 +73,11 @@ export function SiteHeader({ showBuy = true }: SiteHeaderProps) {
         </nav>
 
         <div className="site-header__actions">
-          {saleEnd ? (
-            <div className="header-countdown">
-              <Countdown endDate={saleEnd} />
-            </div>
+          {showBuy ? (
+            <BuyButton className="btn--header header-cta">
+              Get the book, $97
+            </BuyButton>
           ) : null}
-          {showBuy ? <BuyButton className="btn--header" /> : null}
           <button
             type="button"
             className="menu-toggle"
@@ -101,7 +93,7 @@ export function SiteHeader({ showBuy = true }: SiteHeaderProps) {
 
       {open ? (
         <div className="mobile-menu" id="mobile-menu">
-          <div className="mobile-menu__inner container-page">
+          <div className="container mobile-menu__inner">
             <nav aria-label="Mobile navigation" className="mobile-menu__links">
               {navLinks.map((link) => (
                 <a
@@ -115,12 +107,14 @@ export function SiteHeader({ showBuy = true }: SiteHeaderProps) {
               ))}
             </nav>
             <div className="mobile-menu__cta">
-              <BuyButton
-                className="btn--lg w-full justify-center"
-                onClick={() => setOpen(false)}
-              />
+              {showBuy ? (
+                <BuyButton
+                  className="btn--lg"
+                  onClick={() => setOpen(false)}
+                />
+              ) : null}
               <p className="mobile-menu__note">
-                Hardcover edition &bull; Field journal &bull; 60-day refund
+                Hardcover edition · Field journal · 60-day refund
               </p>
             </div>
           </div>
